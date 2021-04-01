@@ -46,7 +46,6 @@ module Moromi::Error
     end
 
     def render_force_update(exception: Moromi::Error::NeedForceUpdate.new, options: nil, locals: {})
-      options = options || {partial: ERROR_TEMPLATES[:default], layout: false}
       render_bad_request(exception: exception, options: options, locals: locals)
     end
 
