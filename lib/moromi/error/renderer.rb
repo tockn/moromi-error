@@ -12,7 +12,7 @@ module Moromi::Error
       class_attribute :default_moromi_error_renderer_options
       class_attribute :moromi_error_logger
 
-      self.moromi_error_template_path = ERROR_TEMPLATES[:default]
+      self.default_moromi_error_template_path = ERROR_TEMPLATES[:default]
       self.default_moromi_error_renderer_options = {layout: false}
       self.moromi_error_logger = Moromi::Error::DefaultLogger.new
     end
@@ -59,8 +59,8 @@ module Moromi::Error
 
     private
 
-    def render_error(status, title, exception, options: nil, locals: {})
-      template_path = self.class::moromi_error_template_path
+    def render_error(status, title, exception, options: nil, template_path: nil, locals: {})
+      template_path ||= self.class::default_moromi_error_template_path
       options = options || self.class::default_moromi_error_renderer_options
       e = Moromi::Error::Default.make(exception)
 
