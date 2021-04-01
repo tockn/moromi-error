@@ -70,6 +70,7 @@ module Moromi::Error
       options = {status: status}.merge(options)
       locals = {status: status, title: title, exception: e}.merge(locals)
 
+      p options, locals
       render_block = -> {
         render template_path, **options, locals: locals
       }
