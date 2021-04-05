@@ -59,7 +59,7 @@ module Moromi::Error
 
     private
 
-    def render_error(status, title, exception, options: nil, template_path: nil, locals: {})
+    def render_error(status, title, exception, template_path: nil, options: nil, locals: {})
       template_path ||= self.class::default_moromi_error_template_path
       options = options || self.class::default_moromi_error_renderer_options
       e = Moromi::Error::Default.make(exception)
@@ -69,6 +69,7 @@ module Moromi::Error
       options = {status: status}.merge(options)
       locals = {status: status, title: title, exception: e}.merge(locals)
 
+      p options, locals
       render_block = -> {
         render template_path, **options, locals: locals
       }
